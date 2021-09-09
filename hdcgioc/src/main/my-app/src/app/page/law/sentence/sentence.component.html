@@ -1,0 +1,61 @@
+
+
+
+<div class="container-wraper">
+  <div class="treeselect">
+      <nz-input-group [nzSuffix]="suffixIcon">
+        <input type="text" nz-input placeholder="Search" [(ngModel)]="searchValue" />
+      </nz-input-group>
+      <ng-template #suffixIcon>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+      <nz-tree
+        [nzData]="nodes"
+        [nzSearchValue]="searchValue"
+        (nzClick)="nzEvent($event)"
+      >
+      </nz-tree>
+  </div>
+    <!-- <video id="mp4" src="http://127.0.0.1:8080/play/哈哈哈.mp4"></video>
+    <a href="http://127.0.0.1:8080/play/自我介绍.docx"></a> -->
+
+  <div class="type-table">
+      <h2 class="cont-title">
+          指标文件列表
+      </h2>
+      <nz-table #basicTable
+      [nzFrontPagination]="false"
+      [nzData]="listOfData"
+      [nzTotal]="listOfData.length"
+     >
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>指标名称</th>
+              <th>文件名称</th>
+              <th>文件类型</th>
+              <th nzWidth="60px">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of basicTable.data;let i = index">
+              <td>{{ i+1 }}</td>
+              <td>{{ selectTitle }}</td>
+              <td>{{ data.name}}</td>
+              <td>{{  data.type == '1' ? '视频':'文件' }}</td>
+              <td>
+                <a (click)="gotoVideo(data)">
+                  {{  data.type == '1' ? '播放':'下载' }}</a>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+  </div>
+</div>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="播放视频" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzFooter]="tplFooter">
+  <div style="display:flex;width: 480px;height: 360px;">
+    <video style="width: 100%;background: black;"  controls autoplay  [src]="videosrc"></video>
+  </div>
+  <ng-template #tplFooter>
+  </ng-template>
+</nz-modal>

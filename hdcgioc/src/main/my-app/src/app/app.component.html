@@ -1,0 +1,43 @@
+<nz-layout *ngIf = "isLogin">
+    <nz-header>
+      <div class="logo">  <i nz-icon nzType="file"></i>健康知识图谱指标应用平台</div>
+      <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+      </ul>
+    </nz-header>
+    <nz-layout>
+      <nz-sider nzWidth="200px" nzTheme="light">
+        <ul nz-menu nzMode="inline" class="sider-menu">
+          <li nz-submenu nzOpen  [nzTitle]="titleTpl">
+            <ng-template #titleTpl><i nz-icon nzType="file"></i><span>知识图谱分类</span></ng-template>
+            <ul>
+              <li nz-menu-item nzMatchRouter><a routerLink="/type">全方位健康评估</a></li>
+              <li nz-menu-item nzMatchRouter><a routerLink="/sentence">健康监测</a></li>
+              <li nz-menu-item nzMatchRouter><a routerLink="/education">安全管理健康</a></li>
+              <li nz-menu-item nzMatchRouter><a routerLink="/agecase">老年综合征</a></li>
+              <li nz-menu-item nzMatchRouter><a routerLink="/province">老年功能康复</a></li>
+              <li nz-menu-item nzMatchRouter><a routerLink="/period">老年长期照护</a></li>
+              <li nz-menu-item nzMatchRouter><a routerLink="/story">安宁疗养</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </nz-sider>
+      <nz-layout class="inner-layout">
+        <!-- <nz-breadcrumb>
+          <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+          <nz-breadcrumb-item>List</nz-breadcrumb-item>
+          <nz-breadcrumb-item>App</nz-breadcrumb-item>
+        </nz-breadcrumb> -->
+        <nz-content>
+            <router-outlet></router-outlet>
+        </nz-content>
+      </nz-layout>
+    </nz-layout>
+  </nz-layout>
+
+  <nz-layout *ngIf="!isLogin">
+    <nz-content>
+      <app-login (nzChangeLogin)="nzChangeLogin($event)"></app-login>
+    </nz-content>
+  </nz-layout>
+
