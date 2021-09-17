@@ -7,6 +7,10 @@
     <nz-layout>
       <nz-sider nzWidth="200px" nzTheme="light">
         <ul nz-menu nzMode="inline" class="sider-menu">
+          <!-- <li nz-menu-item nz-tooltip nzPlacement="right"  nzMatchRouter  nzSelected>
+            <i nz-icon nzType="file"></i>
+            <a routerLink="/sentence">文档检索</a>
+          </li> -->
           <li nz-submenu nzOpen  [nzTitle]="titleTpl">
             <ng-template #titleTpl><i nz-icon nzType="file"></i><span>知识图谱分类</span></ng-template>
             <ul>
@@ -19,6 +23,7 @@
               <li nz-menu-item nzMatchRouter><a routerLink="/story">安宁疗养</a></li>
             </ul>
           </li>
+
         </ul>
 
       </nz-sider>

@@ -81,6 +81,9 @@ export class LawService {
   getAllList(code){
     return this.http.get(this.url+"get_wenshuBy_definite?code="+code).pipe(map((res)=>res))
   }
+  getFileListByKeyWord(keyword){
+    return this.http.get(this.url+"getFileListByKeyWord?keyword="+keyword).pipe(map((res)=>res))
+  }
   getLawsStory(){
     return this.http.get(this.url+"get_laws").pipe(map((res:{"laws":[string]})=>res.laws))
   }

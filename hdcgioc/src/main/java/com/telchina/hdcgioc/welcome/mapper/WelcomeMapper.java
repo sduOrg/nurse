@@ -22,6 +22,7 @@ public interface WelcomeMapper {
 
     int get_definite_num(String penalty_definite);
     List<Map> get_wenshu_ByDefinite(String code);
+    List<Map> getFileListByKeyWord(String keyword);
     int get_class_num(String penalty_class);
     List<wenshu_info> get_wenshu_Byclass(String penalty_class, int page_start, int page_size);
     //刑罚种类 文化程度 年龄 类罪 个罪

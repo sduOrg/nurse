@@ -67,6 +67,13 @@ public class WelcomeService {
         resultMap.put("list",wenshu_list);
         return resultMap;
     }
+    public Map<String,Object> getFileListByKeyWord(String keyword){
+        Map<String,Object> resultMap = new HashMap<>();
+        List<Map> list = welcomeMapper.getFileListByKeyWord(keyword);
+        resultMap.put("list",list);
+        return resultMap;
+    }
+
     public Map  get_class_num(String penalty_class) {
         int class_num = welcomeMapper.get_class_num(penalty_class);
         Map m = new HashMap();

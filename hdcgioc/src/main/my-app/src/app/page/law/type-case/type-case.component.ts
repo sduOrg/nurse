@@ -14,10 +14,10 @@ declare var webconfig;
 
 export class TypeCaseComponent implements OnInit {
 
- 
   private webconfig = webconfig;
   isVisible = false;
   searchValue = '';
+  searchfc = '';
   videosrc = '';
   selectTitle:any;
   total:number = 0;
@@ -110,7 +110,7 @@ export class TypeCaseComponent implements OnInit {
        if( !item.children || item.children.length == 0){
          item.isLeaf = true;
        }else{
-        //  item.selectable = false;
+         item.selectable = false;
          this.treeIsLeaf(item.children)
        }
     })
@@ -134,28 +134,43 @@ export class TypeCaseComponent implements OnInit {
   
   nzEvent(event: NzFormatEmitEvent): void {
     console.log(event);
-    let key = event.selectedKeys[0].key;
+    this.searchfc = '';
+    // if(!!event.selectedKeys[0]){
+    let key = event.selectedKeys[0].origin.key;
+    // }
+    let children = event.selectedKeys[0].origin.children;
     debugger;
     let selectTitle = event.selectedKeys[0].origin.title;
     if (!!selectTitle) {
       this.selectTitle = selectTitle;
     }
-    if (!!key) {
+    if (!!key && children.length ==  0) {
       this.queryDataList(key)
      
     }
   }
-
+  doSearchFc(){
+    console.log(this.searchfc);
+    this.lawSerivce.getFileListByKeyWord(this.searchfc).subscribe(
+      data =>{
+        console.log("data",data);
+        this.total = data["list"].length;
+        this.listOfData = data["list"];
+        this.listOfTotal = data["list"];
+        this.listOfData = this.listOfData.slice(0,10);
+      }
+    )
+  }
   queryDataList(key){
-    this.lawSerivce.getAllClass(key).subscribe(
-      res =>{
-        let list = res["list"];
-        let code = ''
-        list.forEach(item => {
-          code += item.id+","
-        });
-        code = code.slice(0, code.length-2)
-        this.lawSerivce.getAllList(code).subscribe(
+    // this.lawSerivce.getAllClass(key).subscribe(
+    //   res =>{
+    //     let list = res["list"];
+    //     let code = ''
+    //     list.forEach(item => {
+    //       code += item.id+","
+    //     });
+    //     code = code.slice(0, code.length-2)
+        this.lawSerivce.getAllList(key).subscribe(
           data=>{
             console.log("data",data);
             this.total = data["list"].length;
@@ -163,8 +178,8 @@ export class TypeCaseComponent implements OnInit {
             this.listOfTotal = data["list"];
             this.listOfData = this.listOfData.slice(0,10);
           }
-        )
-      }
+        // )
+      // }
     )
   }
   currentPageDataChange(event){
